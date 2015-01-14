@@ -1,35 +1,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity" >
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical" >
 
         <Button
+            android:id="@+id/makePicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/makePhoto"
-            android:id="@+id/pictureBTN" />
+            android:text="@string/make" />
 
         <Button
+            android:id="@+id/drawPicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/drawONPhoto"
-            android:id="@+id/drawBTN" />
+            android:text="@string/draw" />
 
         <Button
+            android:id="@+id/sendPicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sendPhoto"
-            android:id="@+id/sendBTN" />
+            android:text="@string/send" />
+
     </LinearLayout>
 
 </RelativeLayout>
