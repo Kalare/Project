@@ -11,6 +11,7 @@ import android.content.Intent;
 
 public class MainActivity extends Activity {
 	 Bitmap bp;
+    URI path;
 	 static final int REQUEST_IMAGE_CAPTURE = 1;
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -26,13 +27,14 @@ public class MainActivity extends Activity {
 	            }
 	        });
             @Override
-            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
                 super.onActivityResult(requestCode, resultCode, data);
 
                 if (resultCode == RESULT_OK){
                     bp = (Bitmap) data.getExtras().get("data");
+                    saveImageToInternalStorage(bp);
                 }else{
-                    Toast.makeText(getApplicationContext(), "Nie zapisano zdjęcia", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Zapisywanie się nie powiodło", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -52,6 +54,7 @@ public class MainActivity extends Activity {
 	            	
 	                Intent intent = new Intent(Intent.ACTION_SENDTO);	                
 	                intent.setData(Uri.parse("mailto: "));
+                    intent.putExtra(Intent.EXTRA_STREAM, path)
 	                startActivity(intent);
 	            }
 	        });
@@ -62,4 +65,25 @@ public class MainActivity extends Activity {
 	    	Intent intent = new Intent(this, DrawONpicture.class);
 			startActivity(intent);
 	    }
-	}
+
+    public boolean saveImageToInternalStorage(Bitmap image) {
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+
+        String fname = "Image.jpg";
+
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        path = root+"/saved_images/Image.jpg";
+    }
