@@ -13,6 +13,7 @@ import android.view.View;
 
 public class DrawView extends View {
 	private Paint paint = new Paint();
+
 	private Path path = new Path();
 
 	public DrawView(Context context, AttributeSet attrs) {
