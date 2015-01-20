@@ -63,6 +63,7 @@ public class MainActivity extends Activity {
 	    
 	    private void drawOnpicture(){
 	    	Intent intent = new Intent(this, DrawONpicture.class);
+            intent.putExtra("key",bp);
 			startActivity(intent);
 	    }
 
